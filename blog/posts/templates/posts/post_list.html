@@ -1,0 +1,15 @@
+{% extends 'base_template.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+    {% if posts %}
+        {% for post in post_list %}
+        {% endfor %}
+    {% else %}
+        <p>No posts published</p>
+    {% endif %}
+{% endblock %}
+

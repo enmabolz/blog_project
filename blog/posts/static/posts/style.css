@@ -1,0 +1,16 @@
+body { 
+    background-color: #FEFAF6; 
+    color: #102C57;
+    font-weight: bold;
+}
+
+form {
+    background-color: #DAC0A3;
+    margin: 3% auto;
+    padding: 2%;
+}
+
+.btn {
+    font-weight: bold;
+    color: #102C57;
+}

@@ -1,0 +1,18 @@
+{% extends 'base_template.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Post Creation
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <div class="d-grid gap-2">
+            <button class="btn btn-outline-dark" type="button">Submit</button>
+        </div>
+    </form>
+{% endblock%}
+
