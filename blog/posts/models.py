@@ -7,4 +7,5 @@ class Post(models.Model):
     dislikes = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    post_image = models.ImageField(upload_to="post_images", null=True)
     

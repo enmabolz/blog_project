@@ -5,25 +5,25 @@ from .models import Post
 
 class PostList(ListView):
     model = Post
-    template_name = 'post_list.html'
+    template_name = 'posts/post_list.html'
     context_object_name = 'post_list'
     
         
 class PostDetails(DetailView):
     model = Post
-    template_name = 'post_detail.html'
+    template_name = 'posts/post_detail.html'
     context_object_name = 'post'
     
     
 class PostCreation(CreateView):
     model = Post
-    template_name = 'post_create.html'
-    fields = ['title', 'content']
+    template_name = 'posts/post_create.html'
+    fields = ['title', 'post_image', 'content']
     
     
 class PostUpdate(UpdateView):
     model = Post
-    template_name = 'post_update.html'
+    template_name = 'posts/post_update.html'
     fields = ['title', 'content', 'created_at', 'likes', 'dislikes']
     
     
