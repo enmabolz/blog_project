@@ -5,12 +5,20 @@ body {
     font-family: "Open Sans", sans-serif;
 }
 
-.create-form {
+.confirm-delete-form, .create-form {
     background-color: #DAC0A3;
-    margin: 2% auto;
     padding: 2%;
     max-width: 80%;
 }
+
+.create-form {
+    margin: 2% auto;
+}
+
+.confirm-delete-form {
+    margin: 5% auto;
+}
+
 
 .btn {
     background-color: #102C57;
@@ -22,7 +30,7 @@ body {
 }
 
 .details {
-    max-width: 70%;
+    max-width: 80%;
     margin: 2% auto;
 }
 

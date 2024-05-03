@@ -30,10 +30,9 @@ class PostDetails(DetailView):
             
             post.save()
             return HttpResponseRedirect(request.path + '#end')
-        # Redirect to the same page
+        
         return super().post(request, *args, **kwargs)
             
-    
     
 class PostCreation(CreateView):
     model = Post
@@ -42,11 +41,8 @@ class PostCreation(CreateView):
     success_url = reverse_lazy('posts:post-list')
     
     
-class PostUpdate(UpdateView):
-    model = Post
-    template_name = 'posts/post_update.html'
-    fields = ['title', 'content', 'created_at', 'likes', 'dislikes']
-    
-    
 class PostDelete(DeleteView):
-    pass
+    model = Post
+    template_name = 'posts/post_confirm_delete.html'
+    success_url = reverse_lazy('posts:post-list')
+    context_object_name = 'post'
