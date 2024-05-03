@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from .models import Post
+from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
 
 
 class PostList(ListView):
@@ -14,11 +16,30 @@ class PostDetails(DetailView):
     template_name = 'posts/post_detail.html'
     context_object_name = 'post'
     
+    def post(self, request, *args, **kwargs):
+        post_id = request.POST.get('post_id')
+        action = request.POST.get('action')
+        
+        if post_id and action:
+            post = Post.objects.get(pk=post_id)
+            
+            if action == 'like':
+                post.likes += 1
+            elif action == 'dislike':
+                post.dislikes += 1
+            
+            post.save()
+            return HttpResponseRedirect(request.path + '#end')
+        # Redirect to the same page
+        return super().post(request, *args, **kwargs)
+            
+    
     
 class PostCreation(CreateView):
     model = Post
     template_name = 'posts/post_create.html'
     fields = ['title', 'post_image', 'content']
+    success_url = reverse_lazy('posts:post-list')
     
     
 class PostUpdate(UpdateView):
@@ -29,4 +50,3 @@ class PostUpdate(UpdateView):
     
 class PostDelete(DeleteView):
     pass
-

@@ -2,15 +2,29 @@ body {
     background-color: #FEFAF6; 
     color: #102C57;
     font-weight: bold;
+    font-family: "Open Sans", sans-serif;
 }
 
-form {
+.create-form {
     background-color: #DAC0A3;
-    margin: 3% auto;
+    margin: 2% auto;
     padding: 2%;
+    max-width: 80%;
 }
 
 .btn {
-    font-weight: bold;
-    color: #102C57;
+    background-color: #102C57;
+    color: white;
 }
+
+.card-color {
+    background-color: #DAC0A3;
+}
+
+.details {
+    max-width: 70%;
+    margin: 2% auto;
+}
+
+
+

@@ -7,12 +7,14 @@
 {% endblock %}
 
 {% block content %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form | crispy }}
-        <div class="d-grid gap-2">
-            <button class="btn btn-outline-dark" type="button">Submit</button>
-        </div>
-    </form>
+
+<form class="create-form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <div class="d-grid gap-2">
+        <button class="btn btn-outline" type="submit">Submit</button>
+    </div>
+</form>
+    
 {% endblock%}
 

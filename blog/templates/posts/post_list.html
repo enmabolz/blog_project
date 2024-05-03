@@ -5,11 +5,39 @@
 {% endblock %}
 
 {% block content %}
-    {% if posts %}
+<div class="container">
+    {% if post_list %}
+    <div class="row">
         {% for post in post_list %}
+        <div class="col-md-6">
+            <div class="card m-2 card-color">
+                {% if post.post_image %}
+                    <img src="{{ post.post_image.url }}" class="card-img-top" alt="">
+                {% endif %}                        
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-uppercase"><b>{{ post.title }}</b></h5>
+
+                    <p class="card-text">
+                        <small class="text-muted">{{ post.created_at.date }}</small>
+                    </p>
+                    <hr>
+                    
+                    <span class="d-inline-block fw-normal" >
+                        {{ post.partial_content_to_show }}
+                    </span>
+                    <hr>
+                        
+                    <a href="{% url 'posts:post-details' pk=post.id %}" class="btn btn-outline"">
+                        Continue Reading
+                    </a>
+                </div>
+            </div>    
+        </div>   
         {% endfor %}
+    </div>
     {% else %}
-        <p>No posts published</p>
+        <h4>No Posts Available</h4>
     {% endif %}
+</div>
 {% endblock %}
 

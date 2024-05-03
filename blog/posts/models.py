@@ -1,11 +1,16 @@
 from django.db import models
 
 class Post(models.Model):
-    title = models.CharField(max_length=30)
+    title = models.CharField(max_length=50)
     content = models.TextField()
-    likes = models.IntegerField()
-    dislikes = models.IntegerField()
+    partial_content_to_show = models.CharField(max_length=300, blank=True)
+    likes = models.IntegerField(default=0)
+    dislikes = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    post_image = models.ImageField(upload_to="post_images", null=True)
+    post_image = models.ImageField(upload_to="images/post_images", null=True, blank=True)
+    
+    def save(self, *args, **kwargs):
+        self.partial_content_to_show = self.content[0:300]
+        
+        super().save(*args, **kwargs)
     
