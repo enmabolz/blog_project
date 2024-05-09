@@ -49,18 +49,15 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ms-auto">
               <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
+                <a class="nav-link" href="{% url 'users:login' %}">Login</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Register</a>
+                <a class="nav-link" href="{% url 'users:register' %}">Register</a>
               </li>
-
           </ul>
         </div>
       </div>
     </nav>  
-    
-    
     
     {% block content %}{% endblock %}
 

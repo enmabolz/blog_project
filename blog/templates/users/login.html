@@ -1,0 +1,20 @@
+{% extends 'base_template.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+    <form method="post" class="login-form" novalidate>
+        <h4>Please login:</h4>
+        <hr>
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div class="d-grid gap-2">
+            <button class="btn btn-outline" type="submit"><strong>Login</strong></button>
+        </div>
+    </form>
+{% endblock %}

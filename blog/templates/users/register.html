@@ -1,0 +1,18 @@
+{% extends 'base_template.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block content %}
+    <form method="post" class="create-user-form" novalidate>
+        <h4>Please fill out the above information to register:</h4>
+        <hr>
+        {% csrf_token %}
+
+        {% crispy form %}
+
+    </form>
+{% endblock %}
