@@ -25,12 +25,11 @@ class UserLogin(TemplateView):
             if user is not None:
                 login(request, user)
                 # Redirect to a success page.
-                return reverse_lazy('posts:post-list')  # Replace 'home' with the name of your homepage URL
+                return redirect('posts:post-list')  # Replace 'home' with the name of your homepage URL
             else:
                 # Return an 'invalid login' error message.
                 messages.error(request, 'Invalid username or password.')
     
-        
 
 class RegisterUserView(CreateView):
     model = CustomUser

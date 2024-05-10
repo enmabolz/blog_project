@@ -4,10 +4,12 @@ from .models import Post
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 
+
 class PostList(ListView):
     model = Post
     template_name = 'posts/post_list.html'
     context_object_name = 'post_list'
+            
             
 class PostDetails(DetailView):
     model = Post
@@ -36,6 +38,7 @@ class PostCreation(CreateView):
     template_name = 'posts/post_create.html'
     fields = ['title', 'post_image', 'content']
     success_url = reverse_lazy('posts:post-list')    
+    
     
 class PostDelete(DeleteView):
     model = Post
