@@ -27,9 +27,10 @@ class UserLogin(TemplateView):
             if user is not None:
                 login(request, user)
                 
-                return redirect('posts:post-list')  
+                return render(request, 'posts:post-list')  
             else:
                 messages.error(request, 'Invalid username or password.')
+                return render(request, 'users/login.html', {'form': form})
     
 
 class RegisterUserView(CreateView):

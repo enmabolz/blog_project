@@ -1,23 +1,23 @@
-from typing import Iterable
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.db import models
 
 class CustomUser(AbstractUser):
-    ROLES_CHOICES = {
-        "ADM": "Administrator",
-        "AUT": "Author",
-        "SUB": "Subscriber",
-    } 
+    ROLE_CHOICES = [
+        ("ADM", "Administrator"),
+        ("AUT", "Author"),
+        ("SUB", "Subscriber"),
+    ]
     
-    username = models.TextField(unique=True)
-    role = models.CharField(max_length=3, choices=ROLES_CHOICES)
+    username = models.CharField(max_length=150, unique=True)
+    role = models.CharField(max_length=3, choices=ROLE_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
     profile_image = models.ImageField(upload_to="profile_pics", blank=True)
     
+    
     def save(self, *args, **kwargs) -> None:
-        self.username = self.get_custom_username()
-        return super().save(*args, **kwargs)
+        if not self.pk and not self.username:  # Only set username for new users
+            self.username = self.get_custom_username()
+        super().save(*args, **kwargs)
     
     def get_custom_username(self):
         base_username = f"{self.first_name.lower()}.{self.last_name.lower()}"
@@ -30,8 +30,8 @@ class CustomUser(AbstractUser):
     
         return username
             
-    
     def __str__(self):
         return self.username
+
     
     
