@@ -45,7 +45,41 @@
             </li>
           </ul>
         </div>
-    
+        
+        {% if user.is_authenticated %}
+        <div class="collapse navbar-collapse d-flex align-items-center" id="navbarNavDropdown">
+          <ul class="navbar-nav ms-auto d-flex align-items-center">
+              <li class="nav-item">
+                <p class="text-center mb-0"><b>Hi {{ user.username }}</b></p>
+              </li>
+
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Actions
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end"">
+                  <li>
+                    <a class="nav-link" href="{% url 'users:edit' pk=user.id %}">Profile</a>
+                  </li>
+                  {% if user.role == 'ADM' or user.role == 'SUB' %}
+                  <li>
+                    <a class="nav-link" href="{% url 'posts:post-create' %}">Create Post</a>
+                  </li>
+                  {% endif %}
+                  <li><hr class="dropdown-divider"></li>
+                  <li>
+                    <form method="post" action="{% url 'users:logout' %}">
+                      {% csrf_token %}
+                      <button type="submit" class="btn-link nav-link">Logout</button>
+                    </form>
+                  </li>
+                </ul>
+              </li>
+              
+          </ul>
+        </div>
+        {% else %}
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ms-auto">
               <li class="nav-item">
@@ -56,6 +90,7 @@
               </li>
           </ul>
         </div>
+        {% endif %}
       </div>
     </nav>  
     

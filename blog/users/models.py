@@ -15,6 +15,9 @@ class CustomUser(AbstractUser):
     
     
     def save(self, *args, **kwargs) -> None:
+        if self.is_superuser:
+            self.role = 'ADM'
+             
         if not self.pk and not self.username:  # Only set username for new users
             self.username = self.get_custom_username()
         super().save(*args, **kwargs)

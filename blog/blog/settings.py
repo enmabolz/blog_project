@@ -152,8 +152,11 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
+# User information
 LOGIN_URL = 'users:login'
 
 LOGIN_REDIRECT_URL = 'posts:post-list'
+
+LOGOUT_REDIRECT_URL = 'posts:post-list'
 
 

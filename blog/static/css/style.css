@@ -5,7 +5,7 @@ body {
     font-family: "Open Sans", sans-serif;
 }
 
-.confirm-delete-form, .create-form {
+.confirm-delete-form, .create-form, .password-form {
     background-color: #DAC0A3;
     padding: 2%;
     max-width: 80%;
@@ -15,10 +15,9 @@ body {
     margin: 2% auto;
 }
 
-.confirm-delete-form {
+.confirm-delete-form, .password-form{
     margin: 5% auto;
 }
-
 
 .btn {
     background-color: #102C57;
@@ -42,12 +41,8 @@ body {
 .login-form {
     background-color: #DAC0A3;
     padding: 5%;
-    max-width: 500px;
-    margin: 5% auto;
-}
-
-.login-form p {
-    margin-bottom: 8%; 
+    max-width: 450px;
+    margin: 10% auto;
 }
 
 .create-user-form {
@@ -60,6 +55,7 @@ body {
 .custom-margin {
     margin: 1%;
 }
+
 
 
 
