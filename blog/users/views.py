@@ -5,11 +5,17 @@ from django.contrib import messages
 from django.views.generic import TemplateView
 from .forms import LoginForm, RegisterUserForm, EditUserForm
 from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic import ListView
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 from .models import CustomUser
 from django.urls import reverse_lazy, reverse
 
 
+class UserList(ListView):
+    model = CustomUser
+    template_name = 'users/user_list.html'
+    context_object_name = 'user_list'
+        
 class UserLogin(TemplateView):
     def get(self, request):
         form = LoginForm()
