@@ -9,7 +9,7 @@ class CustomUser(AbstractUser):
     ]
     
     username = models.CharField(max_length=150, unique=True)
-    role = models.CharField(max_length=3, choices=ROLE_CHOICES)
+    role = models.CharField(max_length=3, choices=ROLE_CHOICES, default='SUB')
     created_at = models.DateTimeField(auto_now_add=True)
     profile_image = models.ImageField(upload_to="profile_pics", blank=True)
     

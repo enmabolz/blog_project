@@ -7,7 +7,7 @@ from .forms import LoginForm, RegisterUserForm, EditUserForm
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 from .models import CustomUser
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 
 class UserLogin(TemplateView):
@@ -40,6 +40,38 @@ class RegisterUserView(CreateView):
     template_name = 'users/register.html'
     form_class = RegisterUserForm
     success_url = reverse_lazy('posts:post-list')
+    
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        
+        if self.request.user.is_authenticated: 
+            kwargs['user'] = self.request.user
+            
+        return kwargs
+    
+    
+    def form_valid(self, form):
+        new_user = form.save()
+        
+        if not self.request.user.is_authenticated:
+            user = authenticate(
+                username=new_user.username,
+                password=form.cleaned_data['password1']
+            )
+            
+            if user is not None:
+                login(self.request, user)
+                messages.success(
+                    self.request, f'User created successfully. You are logged in as: {user.username}.'
+                    )
+                
+                return redirect(reverse('posts:post-list')) 
+        else:
+            messages.success(
+                    self.request, f'User with username "{new_user.username}" created successfully.'
+                )
+            
+        return super().form_valid(form)
     
 
 class EditUser(LoginRequiredMixin, UpdateView):

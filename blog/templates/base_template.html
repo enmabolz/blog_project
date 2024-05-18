@@ -53,7 +53,6 @@
                 <p class="text-center mb-0"><b>Hi {{ user.username }}</b></p>
               </li>
 
-
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Actions
@@ -66,6 +65,9 @@
                   <li>
                     <a class="nav-link" href="{% url 'posts:post-create' %}">Create Post</a>
                   </li>
+                  <li>
+                    <a class="nav-link" href="{% url 'users:register' %}">Create User</a>
+                  </li>
                   {% endif %}
                   <li><hr class="dropdown-divider"></li>
                   <li>
@@ -76,7 +78,6 @@
                   </li>
                 </ul>
               </li>
-              
           </ul>
         </div>
         {% else %}
@@ -93,6 +94,26 @@
         {% endif %}
       </div>
     </nav>  
+
+    {% if messages %}
+        <ul style="list-style: none; padding: 0; text-align: center; max-width: 600px; margin: 5px auto;" class="text-center">
+            {% for message in messages %}
+                <li>
+                  {% if message.tags == 'error' %}
+                  <div class="alert alert-danger alert-dismissible">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                  </div>
+                  {% elif message.tags == 'success' %}
+                  <div class="alert alert-success alert-dismissible">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                  </div>
+                  {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     
     {% block content %}{% endblock %}
 
