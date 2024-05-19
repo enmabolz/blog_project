@@ -61,17 +61,23 @@
                   <li>
                     <a class="nav-link" href="{% url 'users:edit' pk=user.id %}">Profile</a>
                   </li>
-                  {% if user.role == 'ADM' or user.role == 'SUB' %}
+
+                  {% if user.role == 'ADM' or user.role == 'AUT' %}
                   <li>
                     <a class="nav-link" href="{% url 'posts:post-create' %}">Create Post</a>
                   </li>
+                  {% endif %}
+
+                  {% if user.role == 'ADM' %}
                   <li>
                     <a class="nav-link" href="{% url 'users:register' %}">Create User</a>
                   </li>
+                  
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'users:user-list' %}">Visualize Users</a>
                   </li>
                   {% endif %}
+
                   <li><hr class="dropdown-divider"></li>
                   <li>
                     <form method="post" action="{% url 'users:logout' %}">

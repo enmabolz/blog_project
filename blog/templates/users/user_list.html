@@ -15,6 +15,7 @@
             <th scope="col">Lastname</th>
             <th scope="col">Role</th>
             <th scope="col">Created At</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -26,6 +27,9 @@
             <td class="fw-normal">{{ user.last_name }}</td>
             <td class="fw-normal">{{ user.role }}</td>
             <td class="fw-normal">{{ user.created_at }}</td>
+            <td class="fw-normal">
+              <a class="btn btn-outline" href="{% url 'users:edit' pk=user.id %}">Edit User</a>
+            </td>
           </tr>
           {% endfor %}
         </tbody>

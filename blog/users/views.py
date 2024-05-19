@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.views.generic import TemplateView
 from .forms import LoginForm, RegisterUserForm, EditUserForm
@@ -11,10 +11,13 @@ from .models import CustomUser
 from django.urls import reverse_lazy, reverse
 
 
-class UserList(ListView):
+class UserList(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = CustomUser
     template_name = 'users/user_list.html'
     context_object_name = 'user_list'
+    
+    def test_func(self):
+        return self.request.user.role == 'ADM'
         
 class UserLogin(TemplateView):
     def get(self, request):
@@ -80,7 +83,7 @@ class RegisterUserView(CreateView):
         return super().form_valid(form)
     
 
-class EditUser(LoginRequiredMixin, UpdateView):
+class EditUser(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     form_class = EditUserForm
     model = CustomUser
     template_name = 'users/edit_user.html'
@@ -93,15 +96,31 @@ class EditUser(LoginRequiredMixin, UpdateView):
         instance = self.get_object()
         
         context['first_name'] = instance.first_name
-        context['email'] = instance.last_name
+        context['email'] = instance.email
         context['profile_image'] = instance.profile_image
         
         return context
+    
+    
+    def test_func(self):
+        return self.request.user.role == 'ADM' or self.kwargs['pk'] == self.request.user.id
+    
+    
+    def form_valid(self, form):
+        form.save()
+        
+        messages.success(
+                    self.request, 'User edited successfully!!'
+                )
+        
+        return super().form_valid(form)
+        
 
-
-class PasswordChangeView(PasswordChangeView):
+class PasswordChange(LoginRequiredMixin, UserPassesTestMixin, PasswordChangeView):
     template_name = 'users/password_change.html'
+    success_url = reverse_lazy('posts:post-list')
+    
+    def test_func(self):
+        return self.request.user.role == 'ADM' or self.kwargs['pk'] == self.request.user.id
     
     
-class PasswordChangeDoneView(PasswordChangeDoneView):
-    template_name = 'users/password_change_done.html'

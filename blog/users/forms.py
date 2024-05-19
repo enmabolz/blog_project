@@ -147,8 +147,6 @@ class RegisterUserForm(UserCreationForm):
 class EditUserForm(forms.ModelForm):
     username = forms.CharField(max_length=100)
     role = forms.CharField(max_length=50)
-    repeat_password = forms.CharField(max_length=50, widget=forms.PasswordInput)
-    password = forms.CharField(max_length=50, widget=forms.PasswordInput)
         
     def __init__(self, *args, **kwargs):
         super(EditUserForm, self).__init__(*args, **kwargs)
