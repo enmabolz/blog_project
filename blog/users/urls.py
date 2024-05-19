@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import UserList, UserLogin, RegisterUserView, EditUser, PasswordChange, PasswordChangeDone
+from .views import UserList, UserLogin, RegisterUserView, EditUser, PasswordChange
 from django.contrib.auth.views import LogoutView
 
 
