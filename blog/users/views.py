@@ -2,10 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView, DetailView
 from .forms import LoginForm, RegisterUserForm, EditUserForm
 from django.views.generic.edit import CreateView, UpdateView
-from django.views.generic import ListView
 from django.contrib.auth.views import PasswordChangeView
 from .models import CustomUser
 from django.urls import reverse_lazy, reverse
@@ -124,3 +123,7 @@ class PasswordChange(LoginRequiredMixin, UserPassesTestMixin, PasswordChangeView
         return self.request.user.role == 'ADM' or self.kwargs['pk'] == self.request.user.id
     
     
+class UserDetail(DetailView):
+    model = CustomUser
+    template_name = 'users/user_details.html'
+    context_object_name = 'user'

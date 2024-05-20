@@ -7,8 +7,8 @@
 {% endblock %}
 
 {% block content %}
-    <form method="post" class="create-user-form" novalidate>
-        <h4>Please fill out the above information to register:</h4>
+    <form method="post" class="create-user-form" enctype="multipart/form-data" novalidate>
+        <h5>Please fill out the above information to register:</h>
         <hr>
         {% csrf_token %}
 

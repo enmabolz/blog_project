@@ -47,7 +47,7 @@ class RegisterUserForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         
         self.helper = FormHelper()
-        self.helper.form_class = 'form-horizontal'
+        self.helper.form_class = 'container rounded bg-white mt-5 mb-5'
         
         layout_fields = [
             Row(
@@ -80,7 +80,6 @@ class RegisterUserForm(UserCreationForm):
         layout_fields.append(
             ButtonHolder(
                 Submit('submit', 'Register User', css_class='btn btn-outline'),
-                css_class='d-grid gap-2',
             )
         )
         
@@ -186,3 +185,5 @@ class EditUserForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = ['first_name', 'last_name', 'email', 'username', 'role', 'profile_image']
+        
+        

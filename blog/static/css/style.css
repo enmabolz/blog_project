@@ -46,20 +46,48 @@ body {
 }
 
 .create-user-form {
-    background-color: #DAC0A3;
-    max-width: 80%;
     padding: 3%;
-    margin: 2% auto;
+    margin: auto;
+    max-width: 60%;
+    background-color: white;
+    font-style: normal 400;
 }
 
 .custom-margin {
-    margin: 1%;
+    max-width: 250px;
+    
 }
 
 
 .custom-thead {
     background-color: #DAC0A3;
 }
+
+.profile-image {
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    margin: 0 10px; 
+    transition: transform 0.3s ease; 
+}
+  
+.profile-image:hover {
+    transform: scale(1.1); 
+}
+
+.profile-details-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+
+ 
+
 
 
 

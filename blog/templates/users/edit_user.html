@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    <form method="post" class="create-user-form" novalidate>
+    <form method="post" class="create-user-form" enctype="multipart/form-data" novalidate>
         <h4>Please fill out the information to change:</h4>
         <hr>
         {% csrf_token %}
