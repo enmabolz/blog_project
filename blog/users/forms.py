@@ -23,9 +23,6 @@ class LoginForm(forms.Form):
     )
 
 
-from django import forms
-from .models import CustomUser
-
 class RegisterUserForm(forms.ModelForm):
     password1 = forms.CharField(
         widget=forms.PasswordInput,
@@ -54,6 +51,7 @@ class RegisterUserForm(forms.ModelForm):
             else:
                 field.widget.attrs['class'] = 'form-control'
                 field.required = True 
+                
             
     def clean(self):
         cleaned_data = super().clean()
@@ -86,4 +84,5 @@ class EditUserForm(forms.ModelForm):
     username = forms.CharField(max_length=100)
     role = forms.CharField(max_length=50)
         
-        
+
+    
