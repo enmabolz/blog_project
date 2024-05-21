@@ -23,6 +23,9 @@ class LoginForm(forms.Form):
     )
 
 
+from django import forms
+from .models import CustomUser
+
 class RegisterUserForm(forms.ModelForm):
     password1 = forms.CharField(
         widget=forms.PasswordInput,
@@ -38,11 +41,13 @@ class RegisterUserForm(forms.ModelForm):
         model = CustomUser
         fields = ['first_name', 'last_name', 'email', 'role', 'profile_image']
         
-        
-        
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None) 
         super(RegisterUserForm, self).__init__(*args, **kwargs)
         
+        if not user or user.role != 'ADM':
+            self.fields['role'].widget.attrs['disabled'] = True
+            
         for field_name, field in self.fields.items():
             if field_name == 'role':
                 field.widget.attrs['class'] = 'form-select'
@@ -70,7 +75,7 @@ class RegisterUserForm(forms.ModelForm):
             user.save()
         
         return user
-    
+
     
         
 class EditUserForm(forms.ModelForm):
