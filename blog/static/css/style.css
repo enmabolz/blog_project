@@ -45,19 +45,6 @@ body {
     margin: 10% auto;
 }
 
-.create-user-form {
-    padding: 3%;
-    margin: auto;
-    max-width: 60%;
-    background-color: white;
-    font-style: normal 400;
-}
-
-.custom-margin {
-    max-width: 250px;
-    
-}
-
 
 .custom-thead {
     background-color: #DAC0A3;
@@ -85,7 +72,12 @@ body {
     margin-bottom: 15px;
 }
 
-
+.create-user-form {
+    background-color: white;
+    max-width: 800px;
+    margin: 2% auto;
+    padding: 2%;
+}
  
 
 

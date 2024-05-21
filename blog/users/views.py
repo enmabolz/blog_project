@@ -18,6 +18,7 @@ class UserList(LoginRequiredMixin, UserPassesTestMixin, ListView):
     def test_func(self):
         return self.request.user.role == 'ADM'
         
+        
 class UserLogin(TemplateView):
     def get(self, request):
         form = LoginForm()
@@ -71,7 +72,7 @@ class RegisterUserView(CreateView):
                 login(self.request, user)
                 messages.success(
                     self.request, f'User created successfully. You are logged in as: {user.username}.'
-                    )
+                )
                 
                 return redirect(reverse('posts:post-list')) 
         else:
@@ -80,6 +81,11 @@ class RegisterUserView(CreateView):
                 )
             
         return super().form_valid(form)
+    
+    
+    def form_invalid(self, form):
+        messages.error(self.request, 'Please correct the error below.')
+        return self.render_to_response(self.get_context_data(form=form))
     
 
 class EditUser(LoginRequiredMixin, UserPassesTestMixin, UpdateView):

@@ -18,9 +18,11 @@ class CustomUser(AbstractUser):
         if self.is_superuser:
             self.role = 'ADM'
              
-        if not self.pk and not self.username:  # Only set username for new users
+        if not self.pk and not self.username: 
             self.username = self.get_custom_username()
+            
         super().save(*args, **kwargs)
+    
     
     def get_custom_username(self):
         base_username = f"{self.first_name.lower()}.{self.last_name.lower()}"
@@ -32,6 +34,7 @@ class CustomUser(AbstractUser):
             counter += 1
     
         return username
+            
             
     def __str__(self):
         return self.username
