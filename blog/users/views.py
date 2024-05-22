@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.views.generic import TemplateView, ListView, DetailView
 from .forms import LoginForm, RegisterUserForm, EditUserForm
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import PasswordChangeView
 from .models import CustomUser
 from django.urls import reverse_lazy, reverse
@@ -116,9 +117,10 @@ class EditUser(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return super().form_valid(form)
         
 
-class PasswordChange(LoginRequiredMixin, UserPassesTestMixin, PasswordChangeView):
+class PasswordChange(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, PasswordChangeView):
     template_name = 'users/password_change.html'
     success_url = reverse_lazy('posts:post-list')
+    success_message = "Your password was successfully changed."
     
     def test_func(self):
         return self.request.user.role == 'ADM' or self.kwargs['pk'] == self.request.user.id
@@ -128,3 +130,18 @@ class UserDetail(DetailView):
     model = CustomUser
     template_name = 'users/user_details.html'
     context_object_name = 'user'
+    
+
+
+class DeleteUser(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
+    model = CustomUser
+    template_name = 'users/user_confirm_delete.html'
+    success_url = reverse_lazy('posts:post-list')
+    success_message = 'User was deleted'
+    
+    def test_func(self):
+        return self.request.user.role == 'ADM' or self.kwargs['pk'] == self.request.user.id
+    
+    
+    
+    

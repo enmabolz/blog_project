@@ -1,0 +1,15 @@
+{% extends 'base_template.html' %}
+
+{% block title %} 
+    Delete User
+{% endblock %}
+
+{% block content %}
+<form method="post" class="confirm-delete-form">
+    {% csrf_token %}
+    <h4>Are you sure you want to delete user {{ user }} ?</h4>
+    <p>All the data inside will be deleted forever</p>
+    <button type="submit" class="btn">Yes, please</button>
+    <a href="{% url 'users:edit' pk=user.id %}" class="btn">Cancel</a>
+</form>
+{% endblock %}

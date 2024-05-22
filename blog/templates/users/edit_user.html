@@ -46,5 +46,7 @@
     </div>
     
     <div class="mt-5 text-center"><button class="btn btn-outline profile-button" type="submit">Edit User</button></div>
+    <a class="btn btn-outline" href="{% url 'users:user-delete' pk=user.id %}">Delete User</a>
+    
 </form>
 {% endblock %}
