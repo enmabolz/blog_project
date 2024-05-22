@@ -5,9 +5,17 @@
 {% endblock %}
 
 {% block content %}
-<form method="post" class="create-user-form" enctype="multipart/form-data" novalidate>
+<form method="post" class="create-user-form container" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
-    <h4>Please fill out the info to change:</h4>
+    <div class="row">
+        <div class="col-md-8">
+            <h4>Please fill out the info to change:</h4>
+        </div>
+        <div class="col-md-4 text-center">
+            <small>Want to delete this user? </small>
+            <a class="btn btn-sm btn-outline" href="{% url 'users:user-delete' pk=user.id %}">Press here</a>
+        </div>
+    </div>
     <hr>
     <div class="row">
         {% for field in form %}
@@ -45,8 +53,10 @@
         {% endfor %}
     </div>
     
-    <div class="mt-5 text-center"><button class="btn btn-outline profile-button" type="submit">Edit User</button></div>
-    <a class="btn btn-outline" href="{% url 'users:user-delete' pk=user.id %}">Delete User</a>
+    <div class="mt-5 text-center">
+        <button class="btn btn-outline profile-button" type="submit">Edit User</button>
+    </div>
+    
     
 </form>
 {% endblock %}
