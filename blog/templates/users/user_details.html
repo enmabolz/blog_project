@@ -1,7 +1,5 @@
 {% extends 'base_template.html' %}
 
-{% load crispy_forms_tags %}
-
 {% block title %}
     Edit User
 {% endblock %}
@@ -11,7 +9,12 @@
     <div class="row">
         <div class="col-md-3">
             <div class="d-flex flex-column align-items-center text-center p-3">
-                <img class="rounded-circle profile-details-image mt-5" width="100px" src="{{ user.profile_image.url }}">
+                {% if user.profile_image %}
+                  <img class="rounded-circle profile-details-image mt-5" width="100px" src="{{ user.profile_image.url }}">
+                {% else %}
+                  <span class="font-weight-bold">No Profile Image</span>
+                  <hr>
+                {% endif %}
                 <span class="font-weight-bold">{{ user.username }}</span>
                 <span class="text-black-50">{{ user.email }}</span>
             </div>

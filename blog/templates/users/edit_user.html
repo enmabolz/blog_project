@@ -1,17 +1,50 @@
 {% extends 'base_template.html' %}
 
-{% load crispy_forms_tags %}
-
 {% block title %}
-    Edit User
+    Register
 {% endblock %}
 
 {% block content %}
-    <form method="post" class="create-user-form" enctype="multipart/form-data" novalidate>
-        <h4>Please fill out the information to change:</h4>
-        <hr>
-        {% csrf_token %}
-
-        {% crispy form %}
-    </form>
+<form method="post" class="create-user-form" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    <h4>Please fill out the info to change:</h4>
+    <hr>
+    <div class="row">
+        {% for field in form %}
+            {% if field.name == 'profile_image' %}
+                <div class="col-md-12">
+                    <div class="form-group m-2">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+            
+                        {% if field.errors %}
+                            <div class="text-danger">
+                                {% for error in field.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-md-6">
+                    <div class="form-group m-2">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+            
+                        {% if field.errors %}
+                            <div class="text-danger">
+                                {% for error in field.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    
+    <div class="mt-5 text-center"><button class="btn btn-outline profile-button" type="submit">Edit User</button></div>
+</form>
 {% endblock %}

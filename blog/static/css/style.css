@@ -6,7 +6,7 @@ body {
 }
 
 .confirm-delete-form, .create-form, .password-form {
-    background-color: #DAC0A3;
+    background-color: white;
     padding: 2%;
     max-width: 80%;
 }

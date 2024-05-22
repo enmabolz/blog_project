@@ -53,11 +53,15 @@
                 <p class="text-center mb-0"><b>Hi {{ user.username }}</b></p>
               </li>
 
-             {% if user.profile_image %}
+              {% if user.profile_image %}
               <li class="nav-item">
                 <a href="{% url 'users:user-details' pk=user.id %}">
                   <img src="{{ user.profile_image.url }}" alt="{{ user.username }}'s profile image" class="profile-image">
                 </a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'users:user-details' pk=user.id %}">View Profile</a>
               </li>
               {% endif %}
               <li class="nav-item dropdown">
@@ -66,7 +70,10 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end"">
                   <li>
-                    <a class="nav-link" href="{% url 'users:edit' pk=user.id %}">Profile</a>
+                    <a class="nav-link" href="{% url 'users:edit' pk=user.id %}">Edit Profile</a>
+                  </li>
+                  <li>
+                    <a class="nav-link" href="{% url 'users:change-password' pk=user.id %}">Change Password</a>
                   </li>
 
                   {% if user.role == 'ADM' or user.role == 'AUT' %}
