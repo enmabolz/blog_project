@@ -18,7 +18,7 @@ class CustomUser(AbstractUser):
         if self.is_superuser:
             self.role = 'ADM'
              
-        if not self.pk and not self.username: 
+        if not self.username: 
             self.username = self.get_custom_username()
             
         super().save(*args, **kwargs)

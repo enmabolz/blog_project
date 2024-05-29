@@ -18,7 +18,9 @@
                     <h5 class="card-title fw-bold text-uppercase"><b>{{ post.title }}</b></h5>
 
                     <p class="card-text">
-                        <small class="text-muted">{{ post.created_at.date }}</small>
+                        <small class="text-muted">Author: {{ post.author }}</small>
+                        <br>
+                        <small class="text-muted">Created at: {{ post.created_at.date }}</small>
                     </p>
 
                     <hr>
@@ -31,6 +33,11 @@
                     <a href="{% url 'posts:post-details' pk=post.id %}" class="btn btn-outline"">
                         Continue Reading
                     </a>
+                    {% if user.is_authenticated and user.role == 'ADM' or post.author.id == user.id %}
+                        <a href="{% url 'posts:post-delete' pk=post.id %}" class="btn btn-outline"">
+                            Delete Post
+                        </a>
+                    {% endif %}
                 </div>
             </div>    
         </div>   

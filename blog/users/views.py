@@ -130,7 +130,6 @@ class UserDetail(DetailView):
     model = CustomUser
     template_name = 'users/user_details.html'
     context_object_name = 'user'
-    
 
 
 class DeleteUser(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):

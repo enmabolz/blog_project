@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
-
+from .forms import PostCreateForm
 
 class PostList(ListView):
     model = Post
@@ -33,18 +34,38 @@ class PostDetails(DetailView):
         
         return super().post(request, *args, **kwargs)
             
-class PostCreation(CreateView):
+            
+class PostCreation(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
     template_name = 'posts/post_create.html'
-    fields = ['title', 'post_image', 'content']
-    success_url = reverse_lazy('posts:post-list')    
+    form_class = PostCreateForm
+    success_url = reverse_lazy('posts:post-list')
+    
+    def test_func(self):
+        return self.request.user.role == 'ADM' or self.request.user.role == 'AUT'
     
     
-class PostDelete(DeleteView):
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+    
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        
+        kwargs['user'] = self.request.user  
+
+        return kwargs
+    
+    
+class PostDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     template_name = 'posts/post_confirm_delete.html'
     success_url = reverse_lazy('posts:post-list')
     context_object_name = 'post'
+    
+    def test_func(self):
+        return self.request.user.role == 'ADM' or self.request.user.id == self.kwargs['pk']
     
     
 class PostUpdate(UpdateView):

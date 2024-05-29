@@ -68,7 +68,6 @@ class RegisterUserForm(forms.ModelForm):
         return cleaned_data
 
 
-
     def save(self, commit=True):
         user = super(RegisterUserForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password1"])

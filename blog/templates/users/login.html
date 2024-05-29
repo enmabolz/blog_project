@@ -1,7 +1,5 @@
 {% extends 'base_template.html' %}
 
-{% load crispy_forms_tags %}
-
 {% block title %}
     Login
 {% endblock %}
@@ -13,8 +11,18 @@
 
         {% csrf_token %}
 
-        {{ form | crispy }}
-
+        {% for field in form %}
+            <div class="form-group my-3">
+                {{ field }}
+                {% if field.errors %}
+                    <div class="text-danger">
+                        {% for error in field.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
 
         <div class="d-grid gap-2">
             <button class="btn btn-outline" type="submit"><strong>Login</strong></button>
