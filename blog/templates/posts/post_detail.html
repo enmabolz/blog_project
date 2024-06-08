@@ -30,15 +30,43 @@
         <input type="hidden" name="post_id" value="{{ post.id }}">
         {{ post.likes }} <button type="submit" name="action" value="like"><i class="fa-solid fa-thumbs-up"></i></button>
       </form>
-    </div>  
+    </div>
     <div class="col-md-6">
       <form method="post">
         {% csrf_token %}
         <input type="hidden" name="post_id" value="{{ post.id }}">
         {{post.dislikes }} <button type="submit" name="action" value="dislike"><i class="fa-solid fa-thumbs-down"></i></button>
+      </form>
     </div>
-      
+    <div class="col-md-12">
+      {% if comments %}
+        {% for comment in comments %}
+          <p class="card-text">
+            
+            <div class="text-start alert alert-light" role="alert">
+              <small><strong>{{ comment.user }} wrote:</strong></small>
+              <br>
+              {{ comment.content }}
+            </div>
+          </p>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class="col-md-12">
+      <br>
+      {% if user.is_authenticated %}
+        <form method="post">
+          {% csrf_token %}
+          <input type="hidden" name="post_id" value="{{ post.id }}">
+          {{ comment_form }}
+          <br>
+          <button type="submit" class="btn btn-outline btn-sm" name="action" value="comment">Add Comment</button>
+        </form>
+      {% endif %}
+    </div>
+  
     <a name="end"></a>
+    
     </div>
 </div>
 {% endblock %}

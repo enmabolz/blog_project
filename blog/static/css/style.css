@@ -15,6 +15,10 @@ body {
     margin: 2% auto;
 }
 
+.comment-button {
+    width: 50%;
+}
+
 .confirm-delete-form, .password-form{
     margin: 5% auto;
 }

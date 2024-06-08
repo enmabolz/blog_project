@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Post
+from .models import Post, Comment
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
-from .forms import PostCreateForm
+from .forms import PostCreateForm, CommentCreateForm
+
 
 class PostList(ListView):
     model = Post
@@ -17,6 +18,14 @@ class PostDetails(DetailView):
     template_name = 'posts/post_detail.html'
     context_object_name = 'post'
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = Comment.objects.filter(post=self.object)
+        context['comment_form'] = CommentCreateForm
+        
+        return context
+
+        
     def post(self, request, *args, **kwargs):
         post_id = request.POST.get('post_id')
         action = request.POST.get('action')
@@ -28,9 +37,16 @@ class PostDetails(DetailView):
                 post.likes += 1
             elif action == 'dislike':
                 post.dislikes += 1
+            elif action == 'comment':
+                comment_form = CommentCreateForm(request.POST)
+                if comment_form.is_valid():
+                    content = comment_form.cleaned_data['content']
+                    Comment.objects.create(user=request.user, post=post, content=content)
             
             post.save()
+            
             return HttpResponseRedirect(request.path + '#end')
+        
         
         return super().post(request, *args, **kwargs)
             
@@ -73,3 +89,22 @@ class PostUpdate(UpdateView):
     template_name = 'posts/post_update.html'
     fields = ['title', 'post_image', 'content']
     success_url = reverse_lazy('posts:post-list')
+    
+
+class CommentCreation(LoginRequiredMixin, TemplateView):    
+    def post(self, request):
+        form = CommentCreateForm(request.POST)
+        
+        if form.is_valid:
+            content = form.cleaned_data['comment']
+            
+            comment = Comment(
+                user = self.request.user,
+                
+            )
+            
+            
+        
+        
+    
+    
