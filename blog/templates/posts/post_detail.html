@@ -5,15 +5,15 @@
 {% endblock %}
 
 {% block content %}
-<div class="details">
-  <h5 class="card-title fw-bold text-uppercase">{{ post.title }}</h5>
-
-  {% if post.image %}
-  <img src="{{ post.post_image.url }}" class="img-fluid" alt="No Image">
-  {% endif %}
-  
+<div class="card post-details">
+  {% if post.post_image %}
+  <div class="post-detail-image">
+    <img src="{{ post.post_image.url }}" class="card-img-top img-fluid" alt="">
+  </div>
+  <br>
+  {% endif %} 
   <div class="card-body">
-      
+    <h5 class="card-title fw-bold text-uppercase">{{ post.title }}</h5>
     <p class="card-text fw-normal">{{ post.content }}</p>
 
     <p class="card-text">
@@ -21,52 +21,53 @@
       <br>
       <small class="text-muted">Created at: {{ post.created_at.date }}</small>
     </p>
-  </div>
-  <hr>
-  <div class="row text-center">
-    <div class="col-md-6">
-      <form method="post">
-        {% csrf_token %}
-        <input type="hidden" name="post_id" value="{{ post.id }}">
-        {{ post.likes }} <button type="submit" name="action" value="like"><i class="fa-solid fa-thumbs-up"></i></button>
-      </form>
-    </div>
-    <div class="col-md-6">
-      <form method="post">
-        {% csrf_token %}
-        <input type="hidden" name="post_id" value="{{ post.id }}">
-        {{post.dislikes }} <button type="submit" name="action" value="dislike"><i class="fa-solid fa-thumbs-down"></i></button>
-      </form>
-    </div>
-    <div class="col-md-12">
-      {% if comments %}
-        {% for comment in comments %}
-          <p class="card-text">
-            
-            <div class="text-start alert alert-light" role="alert">
-              <small><strong>{{ comment.user }} wrote:</strong></small>
-              <br>
-              {{ comment.content }}
-            </div>
-          </p>
-        {% endfor %}
-      {% endif %}
-    </div>
-    <div class="col-md-12">
-      <br>
-      {% if user.is_authenticated %}
-        <form method="post">
-          {% csrf_token %}
-          <input type="hidden" name="post_id" value="{{ post.id }}">
-          {{ comment_form }}
-          <br>
-          <button type="submit" class="btn btn-outline btn-sm" name="action" value="comment">Add Comment</button>
-        </form>
-      {% endif %}
-    </div>
-  
-    <a name="end"></a>
     
-    </div>
+    <p class="card-text">
+      <div class="row text-center">
+        <div class="col-md-6">
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="post_id" value="{{ post.id }}">
+            {{ post.likes }} <button type="submit" name="action" value="like"><i class="fa-solid fa-thumbs-up"></i></button>
+          </form>
+        </div>
+        <div class="col-md-6">
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="post_id" value="{{ post.id }}">
+            {{post.dislikes }} <button type="submit" name="action" value="dislike"><i class="fa-solid fa-thumbs-down"></i></button>
+          </form>
+        </div>
+        <div class="col-md-12">
+          {% if comments %}
+            {% for comment in comments %}
+              <p class="card-text">
+                
+                <div class="text-start alert alert-light" role="alert">
+                  <small><strong>{{ comment.user }} wrote:</strong></small>
+                  <br>
+                  {{ comment.content }}
+                </div>
+              </p>
+            {% endfor %}
+          {% endif %}
+        </div>
+        <div class="col-md-12">
+          <br>
+          {% if user.is_authenticated %}
+            <form method="post">
+              {% csrf_token %}
+              <input type="hidden" name="post_id" value="{{ post.id }}">
+              {{ comment_form }}
+              <br>
+              <button type="submit" class="btn btn-outline btn-sm" name="action" value="comment">Add Comment</button>
+            </form>
+          {% endif %}
+        </div>
+      
+        <a name="end"></a>
+      </div>
+    </p>
+  </div>
 </div>
 {% endblock %}

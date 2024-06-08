@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post, Comment
@@ -89,20 +88,7 @@ class PostUpdate(UpdateView):
     template_name = 'posts/post_update.html'
     fields = ['title', 'post_image', 'content']
     success_url = reverse_lazy('posts:post-list')
-    
-
-class CommentCreation(LoginRequiredMixin, TemplateView):    
-    def post(self, request):
-        form = CommentCreateForm(request.POST)
-        
-        if form.is_valid:
-            content = form.cleaned_data['comment']
-            
-            comment = Comment(
-                user = self.request.user,
-                
-            )
-            
+               
             
         
         

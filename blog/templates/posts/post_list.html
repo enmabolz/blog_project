@@ -25,9 +25,9 @@
 
                     <hr>
                     
-                    <span class="d-inline-block fw-normal" >
+                    <div class="card-text fw-normal" >
                         {{ post.partial_content_to_show }}
-                    </span>
+                    </div>
                     <hr>
                         
                     <a href="{% url 'posts:post-details' pk=post.id %}" class="btn btn-outline"">
@@ -44,7 +44,11 @@
         {% endfor %}
     </div>
     {% else %}
-        <h4>No Posts Available</h4>
+        <div class="text-center messages-in-main-page">
+            <hr>
+            <h5>No Posts Available</h5>
+            <hr>
+        </div>
     {% endif %}
 </div>
 {% endblock %}

@@ -13,7 +13,7 @@ class LoginForm(forms.Form):
     
     password = forms.CharField(
         widget=forms.PasswordInput(
-            attrs={"class":"form-control", "placeholder": "Write a comment"}
+            attrs={"class":"form-control", "placeholder": "Password"}
         ),
         
         label=''

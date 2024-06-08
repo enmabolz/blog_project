@@ -1,12 +1,25 @@
+:root {
+    --main-color: #0d3b66;
+    --forms-color: #faf0ca; 
+    --components-color: #0d3b66;
+    --hold-components-color: #f4d35e;
+    --foreground-components-color: white;
+    --foreground-hold-components-color: black;
+}
+
+.blog-navbar{
+    background-color: var(--forms-color);
+}
+
+
 body { 
-    background-color: #FEFAF6; 
-    color: #102C57;
-    font-weight: bold;
+    background-color: var(--main-color); 
+    color: black;
     font-family: "Open Sans", sans-serif;
 }
 
 .confirm-delete-form, .create-form, .password-form {
-    background-color: white;
+    background-color: var(--forms-color);
     padding: 2%;
     max-width: 80%;
 }
@@ -24,34 +37,30 @@ body {
 }
 
 .btn {
-    background-color: #102C57;
-    color: white;
+    background-color: var(--components-color);
+    color: var(--foreground-components-color);
 }
 
 .btn:hover {
-    background-color: white;
-    color: black;
+    background-color: var(--hold-components-color);
+    color: var(--foreground-hold-components-color);
 }
 
 .card-color {
-    background-color: #DAC0A3;
+    background-color: var(--forms-color);
 }
 
 .details {
     max-width: 80%;
     margin: 2% auto;
+    padding: 5%;
 }
 
 .login-form {
-    background-color: #DAC0A3;
+    background-color: var(--forms-color);
     padding: 5%;
     max-width: 450px;
-    margin: 10% auto;
-}
-
-
-.custom-thead {
-    background-color: #DAC0A3;
+    margin: 5% auto;
 }
 
 .profile-image {
@@ -77,11 +86,33 @@ body {
 }
 
 .create-user-form {
-    background-color: white;
+    background-color: var(--forms-color);
     max-width: 800px;
     margin: 2% auto;
     padding: 2%;
 }
+
+.post-details {
+    width: 80%; 
+    margin: auto;
+}
+
+
+.post-detail-image {
+    width: 70%; 
+    margin: auto;
+}
+
+.messages-in-main-page {
+    color: white;
+}
+
+#register-button {
+    background-color: var(--hold-components-color);
+    color: black;
+}
+
+
  
 
 
