@@ -75,14 +75,14 @@ Additionally to that:
    - Admin users have the option of comment posts, create posts, edit/delete any posts, create/edit or delete users.
 
 
-# Technologies:
+## Technologies:
 Technologies used to build this blog:
 - Django Framework
 - Python Programming Language
 - HTML, CSS, Django template language (For the frontend part)
 - Bootstrap (CSS Framework for the frontend part)
 
-# Some technical details (for those who has some knowledge of Django):
+## Some technical details (for those who has some knowledge of Django):
 To build this project, I created two apps (users and posts) and used a CBV (class based view) approach. 
 
 I created two apps with the purpose of divide the logic of users and posts. Since comments are tightly coupled with posts and there is no a projection of expanding it in the future, I decide to write the functionality of both in just one app. In a real-world scenario with projection of expansion, it would be a better practice to separate comment and post functionality in two apps.
