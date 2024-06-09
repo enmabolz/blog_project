@@ -34,7 +34,8 @@ This is the code of a blog project built with Django. This was built in order to
   
 3. Install the dependecies. You can use this command: **pip install -r requirements.txt**  
 4. Run the **python manage.py migrate** command to create the database file (using SLQLite).  
-5. Create a superuser (user with administration rights). To do so, you will need to run **python manage.py createsuperuser** command and follow the instructions. Do not forget credentials of this user.     
+5. Create a superuser (user with administration rights).
+   To do so, you will need to run **python manage.py createsuperuser** command and follow the instructions. Do not forget the credentials of this user.     
 5. Run the development server: **python manage.py runserver**
 6. Access to the application: Open your browser and go to 127.0.0.1
 
