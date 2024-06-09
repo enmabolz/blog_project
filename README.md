@@ -43,7 +43,8 @@ This is the code of a blog project built with Django. This was built in order to
 After accesing to the main page, you will have all the available posts listed and a navbar at the top of the webpage. The navbar have links to Login and Register.
 
 This is how it looks like:
-![alt text](image.png)
+![image](https://github.com/enmabolz/blog_project/assets/44421130/833ae055-5062-4168-be7b-a4f22bb2a8f7)
+
 If there is any post, you have the possibility to read it entirely. To leave a comment, you need to register. 
 
 
