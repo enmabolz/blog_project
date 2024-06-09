@@ -32,9 +32,11 @@ This is the code of a blog project built with Django. This was built in order to
      - On Windows: **<name_of_virtual_enviroment>\Scripts\activate**  
      - On Linux: **source <name_of_virtual_enviroment>/bin/activate**
   
-3. Install the dependecies. You can use this command: **pip install -r requirements.txt**
-4. Run the development server: **python manage.py runserver**
-5. Access to the application: Open your browser and go to 127.0.0.1
+3. Install the dependecies. You can use this command: **pip install -r requirements.txt**  
+4. Run the **python manage.py migrate** command to create the database file (using SLQLite).  
+5. Create a superuser (user with administration rights). To do so, you will need to run **python manage.py createsuperuser** command and follow the instructions. Do not forget credentials of this user.     
+5. Run the development server: **python manage.py runserver**
+6. Access to the application: Open your browser and go to 127.0.0.1
 
 ## Usage:
 After accesing to the main page, you will have all the available posts listed and a navbar at the top of the webpage. The navbar have links to Login and Register.
